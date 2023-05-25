@@ -1,0 +1,23 @@
+
+    body
+    {
+        background-color: rgb(234, 160, 75);
+    }
+    
+    .card {
+    margin-block: 3.5rem;
+    }
+    h1 {
+        position: relative;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        overflow: hidden;
+        background: linear-gradient(90deg, rgb(13, 92, 116), rgb(206, 193, 193), rgb(105, 189, 238));
+        background-repeat: no-repeat;
+        background-size: 80%;
+        animation: animate 6s linear infinite;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    }
+      

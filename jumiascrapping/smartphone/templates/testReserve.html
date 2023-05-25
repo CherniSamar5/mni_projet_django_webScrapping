@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartphones</title>
+    <head> 
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    </head>
+    <style>
+        .image-column {
+            width: 150px;  /* Adjust the width as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container m-5" align="center">
+        <div class="row" style="justify-content: space-between">
+            <div class="col-1">
+                
+                <div class="card" style="width: 18rem;">
+                    <img src="../static/images/jumia.png" class="card-img-top" style="height : 90px " >
+                    <div class="card-body">
+                        <form action="{% url 'filterPhones' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="card text-center">
+                                <div class="card-header">Marques</div>
+                            </div>
+                            <div class="mb-3" style="max-height: 140px; overflow: auto;">
+                                {% for brand in brands %}
+                                <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="{{ brand }}"
+                                            id="{{ brand }}" name="brands">
+                                        <label  class="form-check-label" for="{{ brand }}">
+                                            <strong>{{ brand }}</strong>
+                                        </label>
+                                        
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="container">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">TND</span>
+                                    <input type="number" class="form-control" name = "min_price" placeholder="prix minimal" aria-label="Dollar amount (with dot and two decimal places)">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">TND</span>
+                                    <input type="number" class="form-control" name = "max_price" placeholder="prix maximal" aria-label="Dollar amount (with dot and two decimal places)">
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="btn btn-warning btn-lg btn-block">OK</button>
+                            </div>                        
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card" style="width: 65rem";> 
+                <div class="card-body">
+                    <h1>Smartphones</h1>
+                    
+                    
+                        <br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="image-column">Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Brand</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for phone in data %}
+                            <tr>
+                                <td><img src="{{ phone.img }}" alt="Phone Image"></td>
+                                <td>{{ phone.nom }}</td>
+                                <td>{{ phone.prix }}</td>
+                                <td>{{ phone.marque }}</td>
+                                <td><a href="https://www.jumia.com.tn{{ phone.lien }}">See Product</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div></div>
+        </div>
+        
+    </div>
+</body>
+</html>
